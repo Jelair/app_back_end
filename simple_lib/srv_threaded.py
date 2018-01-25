@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 """
 -------------------------------------------------
-   File Name：     srv_single
+   File Name：     srv_threaded
    Description :
    Author :       simplefly
    date：          2018/1/26
@@ -12,11 +12,16 @@
 -------------------------------------------------
 """
 __author__ = 'simplefly'
-# Single-threaded server that serves one client at a time; others must wait.
+# Using multiple threads to serve several clients in parallel.
 
 from simple_lib import zen_utils
+from threading import Thread
+
+def start_threads(listener, workers=4):
+    t = (listener,)
+    for i in range(workers):
+        Thread(target=zen_utils.accept_connections_forever, args=t).start()
 
 if __name__ == '__main__':
-    # address = zen_utils.parse_command_line('simple single-threaded server')
     listener = zen_utils.create_srv_socket(('', 1060))
-    zen_utils.accept_connections_forever(listener)
+    start_threads(listener)

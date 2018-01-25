@@ -24,7 +24,7 @@ aphorisms = {
 
 def get_answer(aphorism):
     """Return the string response to a particular Zen-of-Python aphorism"""
-    time.sleep(0.0) # increase to simulate an expensive operation
+    time.sleep(5.0) # increase to simulate an expensive operation
     return aphorisms.get(aphorism, b'Error: unknown aphorism.')
 
 def parse_command_line(description):
