@@ -23,6 +23,7 @@ def all_events_forever(poll_object):
             yield fd, event
 
 def serve(listener):
+    # fileno() 返回数据流的文件描述符
     sockets = {listener.fileno(): listener}
     addresses = {}
     bytes_received = {}
